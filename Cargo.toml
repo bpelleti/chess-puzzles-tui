@@ -1,0 +1,22 @@
+[package]
+name = "chess-puzzles-tui"
+version = "0.1.0"
+edition = "2021"
+description = "Chess Puzzles TUI - mate-in-N endings drill with a physical-board workflow"
+license = "MIT"
+rust-version = "1.85"
+
+[dependencies]
+crossterm = "0.28"
+ratatui = "=0.28.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock", "std", "serde"] }
+
+[profile.release]
+lto = true
+codegen-units = 1
+
+# Transitive pins for rustc 1.85 (box toolchain). Cargo.lock holds exact versions
+# (seeded from Play Nine's lock). If `cargo update` bumps past 1.85, re-pin:
+#   cargo update instability --precise 0.3.9

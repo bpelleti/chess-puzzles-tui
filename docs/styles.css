@@ -1,0 +1,186 @@
+/* Chess Puzzles TUI — GitHub Pages landing. Colors match src/ui.rs. */
+:root {
+  --bg: #12141a;
+  --bg2: #181b22;
+  --panel: #1e222b;
+  --gold: #f0c850;
+  --cyan: #64bee6;
+  --green: #6ed278;
+  --amber: #e6a046;
+  --red: #e65a5a;
+  --muted: #828791;
+  --text: #d7d7d7;
+  --cream: #f5f0dc;
+  --black-piece: #78d2eb;
+  --light-sq: #4e5460;
+  --dark-sq: #262a32;
+  --term-bg: #101218;
+  --border: #2a2e38;
+  --radius: 12px;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  background: radial-gradient(ellipse at top, #1c2028 0%, var(--bg) 55%);
+  color: var(--text);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+a { color: var(--cyan); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+.hero { margin-bottom: 2.5rem; }
+.hero h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  letter-spacing: -0.02em;
+}
+.hero .tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a1404;
+  background: var(--gold);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+.hero p.lead { margin: 0; color: #c8c8c8; max-width: 44rem; font-size: 1.05rem; }
+.badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.badge {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--gold);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+}
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow: hidden;
+}
+.card h3 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  color: var(--gold);
+  font-family: var(--mono);
+}
+.card.wide { margin-top: 0.25rem; }
+
+.term {
+  background: var(--term-bg);
+  border: 1px solid #2c313c;
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(240,200,80,0.08);
+  overflow: hidden;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #161920;
+  border-bottom: 1px solid var(--border);
+}
+.term-bar .dot { width: 10px; height: 10px; border-radius: 50%; }
+.term-bar .dot.r { background: #ff5f56; }
+.term-bar .dot.y { background: #ffbd2e; }
+.term-bar .dot.g { background: #27c93f; }
+.term-bar .title { margin-left: 8px; color: var(--muted); font-size: 11px; }
+.term-body {
+  padding: 12px 14px 14px;
+  color: var(--text);
+  white-space: pre;
+  overflow-x: auto;
+  min-height: 180px;
+}
+.term.board .term-body { min-height: 280px; font-size: 13px; line-height: 1.45; }
+
+.c-gold { color: var(--gold); }
+.c-cyan { color: var(--cyan); }
+.c-green { color: var(--green); }
+.c-amber { color: var(--amber); }
+.c-red { color: var(--red); }
+.c-muted { color: var(--muted); }
+.c-text { color: var(--text); }
+.c-w { color: var(--cream); font-weight: 700; }
+.c-b { color: var(--black-piece); font-weight: 700; }
+.sq-l { background: var(--light-sq); }
+.sq-d { background: var(--dark-sq); }
+
+section { margin: 2.5rem 0; }
+section h2 {
+  font-size: 1.35rem;
+  margin: 0 0 0.75rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+}
+ul.features { padding-left: 1.2rem; }
+ul.features li { margin: 0.4rem 0; }
+
+table.keys {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+table.keys th,
+table.keys td {
+  text-align: left;
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+table.keys th { color: var(--gold); font-weight: 600; }
+table.keys td:first-child {
+  font-family: var(--mono);
+  color: var(--cyan);
+  white-space: nowrap;
+}
+
+pre.code {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--cream);
+}
+
+.footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+  .term.board .term-body { font-size: 11px; }
+  table.keys td:first-child { white-space: normal; }
+}

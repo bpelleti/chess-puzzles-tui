@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chess Puzzles TUI</title>
+  <meta name="description" content="Rust terminal trainer for mate-in-N endings. Set the position on a real board, solve it on a timer, and grade yourself." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div>
+        <span class="tag">Rust · ratatui · TUI</span>
+        <h1>Chess Puzzles</h1>
+        <p class="lead">
+          A terminal trainer for mate-in-N endings. It shows the position, you set it up
+          on a real board, solve it against a timer, then grade yourself. Fixed-width
+          ASCII, so it stays aligned over SSH.
+        </p>
+        <div class="badges">
+          <span class="badge">MIT</span>
+          <span class="badge">MSRV 1.85</span>
+          <span class="badge">SSH-friendly</span>
+          <span class="badge">300 Lichess puzzles</span>
+          <span class="badge">CC0 data</span>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <h2>UI preview</h2>
+      <p style="color:var(--muted)">The same fixed-width screen the app draws. Puzzle 01J5O, mate in 1, white to move. Empty dark squares are <code>.</code> and light squares are <code>:</code>.</p>
+
+      <div class="card wide">
+        <h3>Endings · setup</h3>
+        <div class="term board">
+          <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">chess-puzzles-tui · Endings</span></div>
+          <div class="term-body"><span class="c-gold"><b>  Mate in 1   </b></span><span class="c-text">1/100</span><span class="c-text">    610</span><span class="c-muted">    01J5O</span>
+<span class="c-gold"><b>  WHITE TO MOVE   </b></span><span class="c-text"><b>  timer 1:00</b></span>
+<span class="c-muted">      a  b  c  d  e  f  g  h  </span>    <span class="c-text">10 white    10 black</span>
+<span class="c-muted">    +------------------------+</span>    <span class="c-gold">White  K  d2</span>
+<span class="c-muted">  8 |</span><span class="c-b sq-l"> r </span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-b sq-d"> r </span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-muted">| 8</span>  <span class="c-gold">White  R  d1</span>
+<span class="c-muted">  7 |</span><span class="c-muted sq-d"> . </span><span class="c-b sq-l"> p </span><span class="c-b sq-d"> p </span><span class="c-muted sq-l"> : </span><span class="c-w sq-d"> N </span><span class="c-b sq-l"> p </span><span class="c-b sq-d"> p </span><span class="c-b sq-l"> k </span><span class="c-muted">| 7</span>  <span class="c-gold">White  N  e7</span>
+<span class="c-muted">  6 |</span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-b sq-d"> p </span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-muted">| 6</span>  <span class="c-gold">White  P  b2 b3 c3 d3 e4 g2 g3</span>
+<span class="c-muted">  5 |</span><span class="c-b sq-d"> p </span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-b sq-d"> n </span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-muted">| 5</span>  <span class="c-cyan">Black  K  h7</span>
+<span class="c-muted">  4 |</span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-w sq-l"> P </span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-muted">| 4</span>  <span class="c-cyan">Black  R  a8 f8</span>
+<span class="c-muted">  3 |</span><span class="c-muted sq-d"> . </span><span class="c-w sq-l"> P </span><span class="c-w sq-d"> P </span><span class="c-w sq-l"> P </span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-w sq-d"> P </span><span class="c-muted sq-l"> : </span><span class="c-muted">| 3</span>  <span class="c-cyan">Black  N  e5</span>
+<span class="c-muted">  2 |</span><span class="c-muted sq-l"> : </span><span class="c-w sq-d"> P </span><span class="c-muted sq-l"> : </span><span class="c-w sq-d"> K </span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-w sq-l"> P </span><span class="c-muted sq-d"> . </span><span class="c-muted">| 2</span>  <span class="c-cyan">Black  P  a5 b7 c7 d6 f7 g7</span>
+<span class="c-muted">  1 |</span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-w sq-l"> R </span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-muted sq-d"> . </span><span class="c-muted sq-l"> : </span><span class="c-muted">| 1</span>
+<span class="c-muted">    +------------------------+</span>
+<span class="c-muted">      a  b  c  d  e  f  g  h  </span>
+<span class="c-text">  White at the bottom (a1 lower left). Set the pieces, then Enter.</span>
+<span class="c-muted">  Session  solved 0  |  second 0  |  hint 0  |  missed 0</span>
+
+<span class="c-cyan"> 1/2/3 level  N/B puzzle  +/- time  Enter start  Q/Esc menu</span></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Main menu</h3>
+          <div class="term">
+            <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">chess-puzzles-tui</span></div>
+            <div class="term-body"><span class="c-gold">  +==========================================+</span>
+<span class="c-gold">  |                                          |</span>
+<span class="c-gold">  |     C H E S S    P U Z Z L E S           |</span>
+<span class="c-gold">  |     mate-in-N  *  set up a real board    |</span>
+<span class="c-gold">  +==========================================+</span>
+
+<span class="c-gold"> &gt; </span><span class="c-cyan">[E] </span><span class="c-gold"><b>Endings drill (mate in N)</b></span>
+<span class="c-gold">   </span><span class="c-cyan">[P] </span><span class="c-text">Progress</span>
+<span class="c-gold">   </span><span class="c-cyan">[Q] </span><span class="c-text">Quit</span>
+
+<span class="c-muted">   Set the puzzle up on a real board, solve it, then check yourself.</span>
+
+<span class="c-green"> Pack: M1 100  M2 100  M3 100  (300 total)</span><span class="c-muted">   Lichess CC0</span>
+<span class="c-cyan"> Up/Down Enter  E Endings  P Progress  Q/Esc Quit</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Review · grade yourself</h3>
+          <div class="term">
+            <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="title">chess-puzzles-tui · Review</span></div>
+            <div class="term-body"><span class="c-gold"><b>  Mate in 1   </b></span><span class="c-text">1/100</span><span class="c-text">    610</span><span class="c-muted">    01J5O</span>
+<span class="c-gold"><b>  WHITE TO MOVE   </b></span><span class="c-green"><b>  used 0:42</b></span>
+
+<span class="c-gold">  Solution: 1. Rh1#</span>
+<span class="c-muted">  anastasiaMate</span>
+<span class="c-muted">  Session  solved 0  |  second 0  |  hint 0  |  missed 0</span>
+
+<span class="c-cyan"> Y solved  2 second try  H hint  N missed  Q/Esc setup</span>
+
+<span class="c-muted">Y stores the grade and loads the next puzzle.</span>
+<span class="c-muted">Esc before a grade drops the attempt.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Features</h2>
+      <ul class="features">
+        <li>Mate in 1, 2, or 3. Each level keeps its own place in the pack.</li>
+        <li>ASCII board with white at the bottom, plus a piece list for setting up a physical board.</li>
+        <li>Timer defaults 1:00 / 3:00 / 5:00. Step by 30 seconds, from 0:30 to 30:00.</li>
+        <li>Amber under 10 seconds, red overtime. The clock does not auto-fail you.</li>
+        <li><code>H</code> shows only the first move. <code>R</code> reveals the line and stops the clock.</li>
+        <li>Self-grade: solved, second try, hint, or missed. Session tallies stay in memory until quit.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Keys</h2>
+      <table class="keys">
+        <thead><tr><th>Screen</th><th>Keys</th></tr></thead>
+        <tbody>
+          <tr><td>Menu</td><td>Up/Down + Enter, E endings, P progress, Q or Esc quit</td></tr>
+          <tr><td>Setup</td><td>1 / 2 / 3 level, N or Right next, B or Left previous, + / − time, Enter start</td></tr>
+          <tr><td>Solving</td><td>H first-move hint, R reveal, Q or Esc back with no grade</td></tr>
+          <tr><td>Review</td><td>Y solved, 2 second try, H hint, N missed</td></tr>
+          <tr><td>Progress</td><td>Q or Esc back. This session only, until saved history lands.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Build &amp; run</h2>
+<pre class="code">git clone https://github.com/bpelleti/chess-puzzles-tui.git
+cd chess-puzzles-tui
+chmod +x play
+./play
+cargo test</pre>
+      <p>The pack is <code>data/puzzles.json</code>, read relative to the working directory. <code>./play</code> cds to the project root first. Over SSH, <code>export TERM=xterm-256color</code> if the colors look off.</p>
+    </section>
+
+    <section>
+      <h2>Puzzle pack</h2>
+      <p>300 puzzles, 100 each of mate in 1, 2, and 3, ratings spread from 600 to 2000. Built once from the <a href="https://database.lichess.org/">Lichess open database</a>, which is released under <strong>CC0</strong>. Thank you, Lichess. Each row links back to <code>https://lichess.org/training/&lt;id&gt;</code>.</p>
+    </section>
+
+    <section>
+      <h2>Still open</h2>
+      <ul class="features">
+        <li><a href="https://github.com/bpelleti/chess-puzzles-tui/issues/1">Save progress</a> — history file, points, and per-level stats.</li>
+        <li><a href="https://github.com/bpelleti/chess-puzzles-tui/issues/2">Celebration</a> — a short ASCII celebration after a clean solve.</li>
+      </ul>
+      <p>Siblings: <a href="https://oldandcodey.github.io/play-nine-tui/">Play Nine</a> and <a href="https://oldandcodey.github.io/yahtzee-tui/">Yahtzee</a>.</p>
+    </section>
+
+    <footer class="footer">
+      <p>MIT © 2026 Bob Pelletier · <a href="https://github.com/bpelleti/chess-puzzles-tui">github.com/bpelleti/chess-puzzles-tui</a></p>
+      <p>Puzzle data © its authors, Lichess CC0. This page is served from the repo <code>/docs</code> folder via GitHub Pages.</p>
+    </footer>
+  </div>
+</body>
+</html>

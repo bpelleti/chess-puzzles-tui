@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")"
+# Load Rust if installed via rustup
+if [ -f "$HOME/.cargo/env" ]; then
+  # shellcheck source=/dev/null
+  . "$HOME/.cargo/env"
+fi
+export TERM="${TERM:-xterm-256color}"
+export COLORTERM="${COLORTERM:-truecolor}"
+
+if ! command -v cargo >/dev/null 2>&1; then
+  echo "cargo not found. Expected at: $HOME/.cargo/bin/cargo"
+  echo "Install with: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+  exit 1
+fi
+
+BIN="./target/release/chess-puzzles-tui"
+# Rebuild when sources change. The puzzle JSON is read at runtime.
+if [ ! -x "$BIN" ] || [ -n "$(find src Cargo.toml Cargo.lock -newer "$BIN" -print -quit)" ]; then
+  echo "Building Chess Puzzles..."
+  cargo build --release
+fi
+exec "$BIN"
