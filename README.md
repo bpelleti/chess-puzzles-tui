@@ -29,7 +29,7 @@ relative to the CWD. Over SSH, `export TERM=xterm-256color` if colors look off.
 | Endings setup | `1`/`2`/`3` level, `N`/Right next, `B`/Left previous, `+`/`-` time, Enter start, `Q`/Esc menu |
 | Solving       | `H` first-move hint, `R` reveal the line, `Q`/Esc back to setup (no grade) |
 | Review        | `Y` solved, `2` second try, `H` used a hint, `N` missed, `Q`/Esc cancel |
-| Progress      | `Q`/Esc back. Shows this session's grades. Saving them is [issue #1](https://github.com/bpelleti/chess-puzzles-tui/issues/1). |
+| Progress      | `Q`/Esc back. Shows this session's grades. Saving them is [issue #2](https://github.com/bpelleti/chess-puzzles-tui/issues/2). |
 
 ## Endings drill
 
@@ -77,10 +77,10 @@ Puzzle data: [Lichess open database](https://database.lichess.org/), released un
 - **Week 2 (done):** Endings drill - pick puzzle by level, ASCII board + piece list for
   board setup, configurable timer, reveal solution, self-grade (Y / 2nd try / hint / N).
   Session tallies show on Progress; they are not saved.
-- **Week 3:** [Save progress](https://github.com/bpelleti/chess-puzzles-tui/issues/1) —
+- **Week 3:** [Save progress](https://github.com/bpelleti/chess-puzzles-tui/issues/2) —
   history JSON (`data/progress.json`), points, per-level stats.
-- **Week 4:** repo and Pages are up. Still open:
-  [celebration on a clean solve](https://github.com/bpelleti/chess-puzzles-tui/issues/2).
+- **Week 4:** the repo is published, and the site source is `docs/` on `main`. Still open:
+  [celebration on a clean solve](https://github.com/bpelleti/chess-puzzles-tui/issues/1).
 
 Out of scope for the Lean MVP: openings trainer, typed-move validation.
 
